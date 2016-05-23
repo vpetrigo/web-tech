@@ -17,6 +17,7 @@ def server_loop(server_sock) -> None:
         for cl in ready_rd:
             if cl == server_sock:
                 (conn, addr) = server_sock.accept()
+                conn.setblocking(False)
                 incoming_con.append(conn)
             else:
                 buf = cl.recv(1024)
