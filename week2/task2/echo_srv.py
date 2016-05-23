@@ -12,7 +12,6 @@ def server_loop(server_sock) -> None:
 
     while True:
         ready_rd, *not_used = select.select(incoming_con, [], [])
-        print(ready_rd)
 
         for cl in ready_rd:
             if cl == server_sock:
@@ -27,7 +26,7 @@ def server_loop(server_sock) -> None:
                     cl.close()
                     incoming_con.remove(cl)
                 else:
-                    conn.send(buf)
+                    cl.send(buf)
 
 
 
