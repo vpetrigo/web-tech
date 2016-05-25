@@ -10,7 +10,7 @@ def app(env, start_response):
     """
         Application for the WSGI server
     """
-    resp = separate_valse(env["QUERY_STRING"], "&")
+    resp = separate_vals(env["QUERY_STRING"], "&")
 
     status = "200 OK"
     response_headers = [
