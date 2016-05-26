@@ -1,12 +1,13 @@
 #!/bin/sh
 
+. /etc/rc.d/ask_app/app_serv_conf.sh
 . /etc/rc.subr
 
 name=ask_app
 rcvar=ask_app_enable
 
 #set up command
-command="/usr/local/bin/gunicorn"
+command="${GUNICORN_EXEC}"
 
 # start/stop commands
 start_precmd="${name}_prestart"
@@ -15,8 +16,8 @@ stop_cmd="${name}_stop"
 #set up pid file
 pidfile="/var/run/${name}.pid"
 
-GUNICORN_CONFIG_PATH="/usr/local/etc/gunicorn/${name}"
-APP=ask.wsgi
+GUNICORN_CONFIG_PATH="${GUNICORN_APP_PATH}/${name}"
+APP=${APP_NAME}
 
 ask_app_prestart()
 {
