@@ -2,8 +2,8 @@
 
 . /etc/rc.subr
 
-name=ask_app
-rcvar=ask_app_enable
+name=hello_app
+rcvar=hello_app_enable
 
 #set up command
 command="/usr/local/bin/gunicorn"
@@ -15,21 +15,21 @@ stop_cmd="${name}_stop"
 #set up pid file
 pidfile="/var/run/${name}.pid"
 
-GUNICORN_CONFIG_PATH="$2/ask"
-APP="ask.wsgi"
+GUNICORN_CONFIG_PATH="$2/etc"
+APP="hello:app"
 
-ask_app_prestart()
+hello_app_prestart()
 {
    mkdir /var/log/${name}-server
    rc_flags="-c ${GUNICORN_CONFIG_PATH}/gunicorn.conf.py -p ${pidfile} ${APP} ${rc_flags}"
 }
 
-ask_app_stop()
+hello_app_stop()
 {
     if [ -f $pidfile ]; then
         kill `cat $pidfile`
     else
-        echo "ask_app is not running"
+        echo "hello_app is not running"
     fi
 }
 
