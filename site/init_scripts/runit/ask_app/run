@@ -1,0 +1,13 @@
+#!/bin/sh
+
+PID_FILE="/var/run/ask_app.pid"
+
+# file with project specific vars
+. local_var
+
+[[ -f $PID_FILE ]] && rm $PID_FILE
+
+exec 2>&1
+echo "Start Ask application server..."
+exec ${GUNICORN_EXEC} ${GUNICORN_ARGS}
+

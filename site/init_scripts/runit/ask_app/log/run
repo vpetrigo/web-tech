@@ -1,0 +1,5 @@
+#!/bin/sh
+
+LOG_FILE="/var/log/ask_app.log"
+
+exec chpst -u root svlogd --t $LOG_FILE
