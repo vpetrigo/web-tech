@@ -54,7 +54,7 @@ add_gunicorn_app_server()
 system_update
 
 update_pip
-add_server_config $SERVER_NGINX_CONF_PATH $NGINX_SITE_ENABLE_PATH
+add_server_config $SERVER_NGINX_CONFIG_PATH $NGINX_SITE_ENABLE_PATH
 
 # Add Hello application server
 add_gunicorn_app_server $HELLO_APP_RUN_SERVER_SCRIPT $GUNICORN_APPS_PATH
