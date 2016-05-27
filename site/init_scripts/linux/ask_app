@@ -1,0 +1,27 @@
+# Upstart file for Ask application
+
+description "Run Ask application via gunicorn"
+author "vpetrigo"
+
+start on (filesystem)
+stop on runlevel [016]
+
+respawn
+setuid www
+setgid www
+
+PROCESS_LOG_DIR="/var/log/ask_app-server"
+
+instance $GUNICORN_CONF_PATH
+
+pre-start script
+    [[ ! -d $PROCESS_LOG_DIR ]] && \
+        mkdir $PROCESS_LOG_DIR 
+end script
+
+post-stop script
+    [[ -d $PROCESS_LOG_DIR ]] && \
+        rm -rf $PROCESS_LOG_DIR
+end script
+
+exec /usr/bin/gunicorn -c $GUNICORN_CONF_PATH ask.wsgi
