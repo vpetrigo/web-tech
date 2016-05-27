@@ -28,6 +28,7 @@ ask_app_stop()
 {
     if [ -f $pidfile ]; then
         kill `cat $pidfile`
+        rm -rf "/var/log/${name}-server"
     else
         echo "ask_app is not running"
     fi
