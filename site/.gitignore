@@ -1,2 +1,4 @@
 # ignore pycache folders
 __pycache__/
+# ignore local-conf.sh
+local_conf.sh

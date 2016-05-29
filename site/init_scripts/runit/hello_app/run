@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# file with project specific vars
+. ./local_vars
+
+exec 2>&1
+echo "Start Hello application server..."
+exec ${GUNICORN_EXEC} ${GUNICORN_ARGS}
+
