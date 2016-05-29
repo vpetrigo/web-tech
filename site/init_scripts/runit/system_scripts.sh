@@ -13,7 +13,7 @@ system_update()
 start_app_servers()
 {
     RUNIT_DIR="$1/init_scripts/runit"
-    apps=(ask_app, hello_app)
+    apps=(ask_app hello_app)
 
     for app in ${apps[*]}; do
         echo "GUNICORN_EXEC=gunicorn" >> $RUNIT_DIR/${app}/local_vars
