@@ -5,8 +5,8 @@ import os.path
 
 bind = "0.0.0.0:8080"
 workers = multiprocessing.cpu_count() * 2 + 1
-user = "www"
-group = "www"
+user = "nobody"
+group = "nogroup"
 umask = "0o77"
 proc_name = "hello_app-server"
 
