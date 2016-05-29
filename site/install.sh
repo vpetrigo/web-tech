@@ -23,7 +23,7 @@ case $CURRENT_SYSTEM in
         source init_scripts/bsd/system_scripts.sh
         ;;
     Linux)
-        source init_scripts/linux/system_scripts.sh
+        source init_scripts/runit/system_scripts.sh
         ;;
     *)
         echo "Your system is not supported yet"
