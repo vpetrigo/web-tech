@@ -15,10 +15,10 @@ PARENT_DIR = os.path.dirname(PARENT_DIR)
 PARENT_DIR = os.path.dirname(PARENT_DIR)
 
 chdir = PARENT_DIR
-pidfile = "/var/run/" + proc_name + ".pid"
+#pidfile = "/var/run/" + proc_name + ".pid"
 
 # logging
-VAR_LOG = "/var/log/"
-accesslog = VAR_LOG + proc_name + "/access.log"
-errorlog = VAR_LOG + proc_name + "/error.log"
+#VAR_LOG = "/var/log/"
+#accesslog = VAR_LOG + proc_name + "/access.log"
+#errorlog = VAR_LOG + proc_name + "/error.log"
 
