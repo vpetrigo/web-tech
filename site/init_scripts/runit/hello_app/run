@@ -4,6 +4,6 @@
 . local_vars
 
 exec 2>&1
-echo "Start Ask application server..."
+echo "Start Hello application server..."
 exec ${GUNICORN_EXEC} ${GUNICORN_ARGS}
 
