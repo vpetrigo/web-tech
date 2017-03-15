@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ##################################################################################
-# to simplify instalation configuring, provide your 'local_conf.sh'
-# file that have to declare variables below:
+# to simplify instalation process, provide your 'local_conf.sh'
+# file that has to declare variables below:
 ################################################################################## 
 # > NGINX_SITE_ENABLE_PATH - path to the site-enable path of nginx
 # > SERVER_NGINX_CONF_PATH - path to your nginx configuration. 
