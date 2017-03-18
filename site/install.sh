@@ -57,8 +57,8 @@ update_pip
 add_server_config $SERVER_NGINX_CONFIG_PATH $NGINX_SITE_ENABLE_PATH
 
 # Add Hello application server
-add_gunicorn_app_server $HELLO_APP_RUN_SERVER_SCRIPT $GUNICORN_APPS_PATH
+# add_gunicorn_app_server $HELLO_APP_RUN_SERVER_SCRIPT $GUNICORN_APPS_PATH
 # Add Ask application server
-add_gunicorn_app_server $ASK_APP_RUN_SERVER_SCRIPT $GUNICORN_APPS_PATH 
+# add_gunicorn_app_server $ASK_APP_RUN_SERVER_SCRIPT $GUNICORN_APPS_PATH 
 
 start_app_servers `pwd`
