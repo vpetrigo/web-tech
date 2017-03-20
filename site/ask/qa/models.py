@@ -14,6 +14,9 @@ class Question(models.Model):
     author = models.ForeignKey(User, on_delete=models.PROTECT)
     likes = models.ManyToManyField(User, related_name="likes")
 
+    class Meta:
+        ordering = ["-rating"]
+
 
 class QuestionManager(models.Manager):
     def new(self):
