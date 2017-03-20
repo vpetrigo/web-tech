@@ -23,14 +23,14 @@ class QuestionManager(models.Manager):
     def new(self):
         cur = connection.cursor()
         cur.execute("""select * from qa_question
-                        order by added_at""")
+                        order by added_at desc""")
 
         return cur.fetchall()
 
     def popular(self):
         cur = connection.cursor()
         cur.execute("""select * from qa_question
-                        order by rating""")
+                        order by rating desc""")
 
         return cur.fetchall()
 
