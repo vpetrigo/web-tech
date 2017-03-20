@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User as auth_models_User
+from django.db import connection
 
 # Create your models here.
 class User(auth_models_User):
@@ -20,10 +21,18 @@ class Question(models.Model):
 
 class QuestionManager(models.Manager):
     def new(self):
-        pass
+        cur = connection.cursor()
+        cur.execute("""select * from qa_question
+                        order by added_at""")
+
+        return cur.fetchall()
 
     def popular(self):
-        pass
+        cur = connection.cursor()
+        cur.execute("""select * from qa_question
+                        order by rating""")
+
+        return cur.fetchall()
 
 
 class Answer(models.Model):
