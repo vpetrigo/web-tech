@@ -2,5 +2,8 @@
 **/local_vars
 **/log/*
 
+# Django
+**/migrations/*
+
 # MySQL config
 **/app.cnf
