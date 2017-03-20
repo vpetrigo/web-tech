@@ -1,3 +1,6 @@
 # Runit configuration
 **/local_vars
 **/log/*
+
+# MySQL config
+**/app.cnf
