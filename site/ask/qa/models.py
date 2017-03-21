@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User as auth_models_User
 from django.db import connection
 
+
 # Create your models here.
 class User(auth_models_User):
     pass
