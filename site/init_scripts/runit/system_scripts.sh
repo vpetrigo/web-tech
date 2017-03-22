@@ -2,9 +2,9 @@
 
 system_update()
 {
-    if [[ ! -z `command -v lsb_version` ]]; then
-        sudo apt-get update -q
-        sudo apt-get upgrade -qy
+    if [[ ! -z `command -v lsb_release` ]]; then
+        apt-get update -q
+        apt-get upgrade -qy
     else
         echo "Nothing to do"
     fi
@@ -25,3 +25,4 @@ start_app_servers()
     sudo ln -s -f $RUNIT_DIR/hello_app /etc/service/
     sudo ln -s -f $RUNIT_DIR/ask_app /etc/service/
 }
+
