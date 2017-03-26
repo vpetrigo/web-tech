@@ -9,13 +9,13 @@ class QuestionManager(models.Manager):
         data = Question.objects.raw(
             "SELECT * FROM qa_question ORDER BY added_at DESC")
 
-        return data
+        return tuple(data)
 
     def popular(self):
         data = Question.objects.raw(
             "SELECT * FROM qa_question ORDER BY rating DESC")
 
-        return data
+        return tuple(data)
 
 
 class Question(models.Model):
