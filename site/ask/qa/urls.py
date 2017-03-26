@@ -7,6 +7,6 @@ urlpatterns = [
     url("^signup/$", views.test, name="signup"),
     url("^question/(?P<id>\d+)/$", views.test, name="question"),
     url("^ask/.*$", views.test, name="ask"),
-    url("^popular/$", views.test, name="popular"),
+    url("^popular/$", views.popular_page, name="popular"),
     url("^new/$", views.test, name="new"),
 ]
