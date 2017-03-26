@@ -6,18 +6,18 @@ from django.db import connection
 # Create your models here.
 class QuestionManager(models.Manager):
     def new(self):
-        cur = connection.cursor()
-        cur.execute("""select * from qa_question
+        with connection.cursor() as cursor:
+            data = cursor.execute("""select * from qa_question
                         order by added_at desc""")
 
-        return cur.fetchall()
+        return data
 
     def popular(self):
-        cur = connection.cursor()
-        cur.execute("""select * from qa_question
+        with connection.cursor() as cursor:
+            data = cursor.execute("""select * from qa_question
                         order by rating desc""")
 
-        return cur.fetchall()
+        return data
 
 
 class Question(models.Model):
@@ -27,6 +27,10 @@ class Question(models.Model):
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(auth_models_User, on_delete=models.PROTECT)
     likes = models.ManyToManyField(auth_models_User, related_name="likes")
+    objects = QuestionManager()
+
+    def __str__(self):
+        return "{}".format(self.title)
 
     class Meta:
         ordering = ["-rating"]
@@ -37,4 +41,3 @@ class Answer(models.Model):
     added_at = models.DateField(auto_now_add=True)
     question = models.ForeignKey(Question, on_delete=models.PROTECT)
     author = models.ForeignKey(auth_models_User, on_delete=models.PROTECT)
-
