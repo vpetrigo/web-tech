@@ -1,5 +1,7 @@
 # Runit configuration
 **/local_vars
+**/log/*
+!**/log/run
 
 # Python
 **/*.pyc
