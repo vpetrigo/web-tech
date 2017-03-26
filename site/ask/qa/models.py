@@ -6,16 +6,14 @@ from django.db import connection
 # Create your models here.
 class QuestionManager(models.Manager):
     def new(self):
-        with connection.cursor() as cursor:
-            data = cursor.execute("""select * from qa_question
-                        order by added_at desc""")
+        data = Question.objects.raw(
+            "SELECT * FROM qa_question ORDER BY added_at DESC")
 
         return data
 
     def popular(self):
-        with connection.cursor() as cursor:
-            data = cursor.execute("""select * from qa_question
-                        order by rating desc""")
+        data = Question.objects.raw(
+            "SELECT * FROM qa_question ORDER BY rating DESC")
 
         return data
 
