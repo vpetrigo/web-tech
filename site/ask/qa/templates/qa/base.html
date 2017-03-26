@@ -11,8 +11,8 @@
     <div id="sidebar">
         {% block sidebar %}
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/">Main page</a></li>
+            <li><a href="/popular/">Popular</a></li>
         </ul>
         {% endblock %}
     </div>
@@ -26,6 +26,16 @@
         </ul>
         {% else %}
             <p>No polls are available.</p>
+        {% endif %}
+    </div>
+
+    <div id="switch-page">
+        {% if questions.has_previous %}
+            <a href="?page={{ questions.previous_page_number }}">previous</a>
+        {% endif %}
+
+        {% if questions.has_next %}
+            <a href="?page={{ questions.next_page_number }}">next</a>
         {% endif %}
     </div>
 </body>
