@@ -1,9 +1,11 @@
 # Runit configuration
 **/local_vars
-**/log/*
 
-# Django
-**/migrations/*
+# Python
+**/*.pyc
 
 # MySQL config
 **/app.cnf
+
+# IDEA
+.idea/
