@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url("^$", views.page, name="index"),
+    url("^$", views.main_page, name="index"),
     url("^login/$", views.test, name="login"),
     url("^signup/$", views.test, name="signup"),
     url("^question/(?P<id>\d+)/$", views.test, name="question"),
