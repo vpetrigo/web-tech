@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Top Asked questions">
+    <link rel="stylesheet" href="style.css" />
+    <title>{{ question.title }}</title>
+</head>
+
+<body>
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="/">Main page</a></li>
+            <li><a href="/popular/">Popular</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        <div id="question-title">
+            <h1>{{ question.title }}</h1>
+        </div>
+        {{ question.text }}
+    </div>
+</body>
+</html>
