@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpRequest, Http404
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Question
 
 
@@ -48,3 +48,10 @@ def popular_page(request: HttpRequest):
         "qa/base.html",
         context={"questions": paginator.page(page_num),
                  "page_num": page_num})
+
+
+def question(request: HttpRequest, question_id: int):
+    req_question = get_object_or_404(Question, id=question_id)
+
+    return render(
+        request, "qa/question.html", context={"question": req_question})
