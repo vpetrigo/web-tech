@@ -34,20 +34,15 @@ source local_conf.sh
 
 update_pip()
 {
-    sudo pip3 install --upgrade pip setuptools
-    sudo pip3 install gunicorn django
+    pip3 install -U pip setuptools
+    pip3 install gunicorn django
 }
 
 add_server_config()
 {
     # move our server config to the nginx's site folder
-    sudo ln -s -f $1 $2
-    sudo service nginx restart
-}
-
-add_gunicorn_app_server()
-{   
-    sudo cp $1 $2
+    ln -s -f $1 $2
+    service nginx restart
 }
 
 # have to be defined in the system init_script 'system_scripts.sh'
@@ -55,10 +50,5 @@ system_update
 
 update_pip
 add_server_config $SERVER_NGINX_CONFIG_PATH $NGINX_SITE_ENABLE_PATH
-
-# Add Hello application server
-# add_gunicorn_app_server $HELLO_APP_RUN_SERVER_SCRIPT $GUNICORN_APPS_PATH
-# Add Ask application server
-# add_gunicorn_app_server $ASK_APP_RUN_SERVER_SCRIPT $GUNICORN_APPS_PATH 
 
 start_app_servers `pwd`
