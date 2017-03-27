@@ -23,5 +23,14 @@
         </div>
         {{ question.text }}
     </div>
+    {% if answers %}
+    <div id="answers">
+        {% for answer in answers %}
+            <div class="answer">
+                {{ answer.text }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </body>
 </html>
