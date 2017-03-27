@@ -1,17 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User as auth_models_User
-from django.db import connection
 
 
 # Create your models here.
 class QuestionManager(models.Manager):
-    def new(self):
+    @staticmethod
+    def new():
         data = Question.objects.raw(
             "SELECT * FROM qa_question ORDER BY added_at DESC")
 
         return tuple(data)
 
-    def popular(self):
+    @staticmethod
+    def popular():
         data = Question.objects.raw(
             "SELECT * FROM qa_question ORDER BY rating DESC")
 
@@ -39,3 +40,7 @@ class Answer(models.Model):
     added_at = models.DateField(auto_now_add=True)
     question = models.ForeignKey(Question, on_delete=models.PROTECT)
     author = models.ForeignKey(auth_models_User, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return "{} answers to {}".format(self.author.username,
+                                         self.question.title)
