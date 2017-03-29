@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
+
 import socket
+
 
 def interpret_buffer(buf) -> str:
     return buf.decode().rstrip()
+
 
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -24,6 +27,7 @@ def main():
         conn.send(buf)
 
     sock.close()
+
 
 if __name__ == "__main__":
     main()
