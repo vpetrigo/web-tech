@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
+
 import socket
 import select
 
+
 def interpret_buffer(buf) -> str:
     return buf.decode().rstrip()
+
 
 def server_loop(server_sock) -> None:
     incoming_con = [server_sock]
@@ -29,7 +32,6 @@ def server_loop(server_sock) -> None:
                     cl.send(buf)
 
 
-
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.setblocking(False)
@@ -39,6 +41,7 @@ def main():
     server_loop(sock)
 
     sock.close()
+
 
 if __name__ == "__main__":
     main()
