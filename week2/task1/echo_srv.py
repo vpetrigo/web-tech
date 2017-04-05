@@ -13,7 +13,6 @@ def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.bind((str(socket.INADDR_ANY), 2222))
     sock.listen()
-
     (conn, addr) = sock.accept()
 
     while conn:
