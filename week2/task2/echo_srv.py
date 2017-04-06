@@ -37,9 +37,7 @@ def main():
     sock.setblocking(False)
     sock.bind((str(socket.INADDR_ANY), 2222))
     sock.listen()
-
     server_loop(sock)
-
     sock.close()
 
 
