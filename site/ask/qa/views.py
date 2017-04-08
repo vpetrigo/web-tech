@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .models import Question, Answer
+from django.contrib.auth.models import User as auth_models_User
 from .forms import AskForm, AnswerForm
 
 
@@ -67,7 +68,8 @@ def question(request: HttpRequest, question_id: int):
 
 def ask(request: HttpRequest):
     if request.method == "POST":
-        form = AskForm(request.POST)
+        stub_user = auth_models_User.objects.get_or_create(username="x", password="y")
+        form = AskForm(request.POST, instance=stub_user)
 
         if form.is_valid():
             # save new form
@@ -79,4 +81,4 @@ def ask(request: HttpRequest):
         # render empty form
         form = AskForm()
 
-        return render(request, "qa/ask.html", {"form": form})
+    return render(request, "qa/ask.html", {"form": form})
