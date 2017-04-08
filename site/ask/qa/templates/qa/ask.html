@@ -10,13 +10,16 @@
 <form action="{% url "qa:ask" %}" method="post">
     {% csrf_token %}
     {% for field in form %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-    </div>
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {% if not field.is_hidden %}
+                {{ field.label_tag }}
+            {% endif %}
+            {{ field }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
     {% endfor %}
     <p><input type="submit" value="Ask"></p>
 </form>

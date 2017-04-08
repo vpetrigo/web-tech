@@ -68,19 +68,18 @@ def question(request: HttpRequest, question_id: int):
 
 def ask(request: HttpRequest):
     if request.method == "POST":
-        stub_user, created = auth_models_User.objects.get_or_create(
-            username="x", password="y")
-        request.POST["author"] = stub_user
-        form = AskForm(request.POST, instance=stub_user)
+        form = AskForm(request.POST)
 
         if form.is_valid():
             # save new form
             new_question = form.save()
             # redirect to a new question page
             return HttpResponseRedirect(
-                reverse("qa:question", args=(new_question.id,)))
+                reverse("qa:question", args=(new_question.id, )))
     else:
+        stub_user, created = auth_models_User.objects.get_or_create(
+            username="x", password="y")
         # render empty form
-        form = AskForm()
+        form = AskForm(initial={"author": stub_user})
 
     return render(request, "qa/ask.html", {"form": form})
