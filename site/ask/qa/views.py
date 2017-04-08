@@ -68,7 +68,8 @@ def question(request: HttpRequest, question_id: int):
 
 def ask(request: HttpRequest):
     if request.method == "POST":
-        stub_user = auth_models_User.objects.get_or_create(username="x", password="y")
+        stub_user, created = auth_models_User.objects.get_or_create(
+            username="x", password="y")
         form = AskForm(request.POST, instance=stub_user)
 
         if form.is_valid():
