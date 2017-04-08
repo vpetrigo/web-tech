@@ -70,6 +70,7 @@ def ask(request: HttpRequest):
     if request.method == "POST":
         stub_user, created = auth_models_User.objects.get_or_create(
             username="x", password="y")
+        request.POST["author"] = stub_user
         form = AskForm(request.POST, instance=stub_user)
 
         if form.is_valid():
@@ -77,7 +78,7 @@ def ask(request: HttpRequest):
             new_question = form.save()
             # redirect to a new question page
             return HttpResponseRedirect(
-                reverse("qa:question"), args=new_question.id)
+                reverse("qa:question", args=(new_question.id,)))
     else:
         # render empty form
         form = AskForm()
