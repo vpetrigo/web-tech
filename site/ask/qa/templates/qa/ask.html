@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Top Asked questions">
+    <title>Title</title>
+</head>
+<body>
+<p>Ask your question</p>
+<form action="{% url "qa:ask" %}" method="post">
+    <p>Question Title:</p>
+    <p><input name="title" type="text"></p>
+    <p>Question Text:</p>
+    <p><textarea name="text"></textarea></p>
+    <p><input type="submit" value="Ask"></p>
+</form>
+</body>
+</html>
