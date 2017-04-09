@@ -55,14 +55,31 @@ def popular_page(request: HttpRequest):
 
 def question(request: HttpRequest, question_id: int):
     req_question = get_object_or_404(Question, id=question_id)
-    related_answers = Answer.objects.all()
+    related_answers = Answer.objects.all().order_by("added_at")
+
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+
+        if form.is_valid():
+            stub_user, created = auth_models_User.objects.get_or_create(
+                username="x", password="y")
+            # save new form
+            new_answer = form.save(commit=False)
+            new_answer.author = stub_user
+            new_answer.save()
+
+            return HttpResponseRedirect(
+                reverse("qa:question", args=[question_id]))
+    else:
+        form = AnswerForm()
 
     return render(
         request,
         "qa/question.html",
         context={
             "question": req_question,
-            "answers": related_answers.filter(question=req_question)
+            "answers": related_answers.filter(question=req_question),
+            "form": form
         })
 
 
@@ -71,15 +88,17 @@ def ask(request: HttpRequest):
         form = AskForm(request.POST)
 
         if form.is_valid():
+            stub_user, created = auth_models_User.objects.get_or_create(
+                username="x", password="y")
             # save new form
-            new_question = form.save()
+            new_question = form.save(commit=False)
+            new_question.author = stub_user
+            new_question.save()
             # redirect to a new question page
             return HttpResponseRedirect(
-                reverse("qa:question", args=(new_question.id, )))
+                reverse("qa:question", args=[new_question.id]))
     else:
-        stub_user, created = auth_models_User.objects.get_or_create(
-            username="x", password="y")
         # render empty form
-        form = AskForm(initial={"author": stub_user})
+        form = AskForm()
 
     return render(request, "qa/ask.html", {"form": form})
