@@ -17,3 +17,12 @@ class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
         fields = ("text", "question")
+
+        widgets = {
+            "question": HiddenInput()
+        }
+
+        labels = {
+            "text": u"Your Answer"
+        }
+
