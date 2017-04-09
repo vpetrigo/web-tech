@@ -71,7 +71,7 @@ def question(request: HttpRequest, question_id: int):
             return HttpResponseRedirect(
                 reverse("qa:question", args=[question_id]))
     else:
-        form = AnswerForm()
+        form = AnswerForm(initial={"question": question_id})
 
     return render(
         request,
