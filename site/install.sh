@@ -35,7 +35,7 @@ source local_conf.sh
 update_pip()
 {
     pip3 install -U pip setuptools
-    pip3 install gunicorn django
+    pip3 install gunicorn Django
 }
 
 add_server_config()
