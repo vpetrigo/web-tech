@@ -21,4 +21,3 @@ chdir = PARENT_DIR
 #VAR_LOG = "/var/log/"
 #accesslog = VAR_LOG + proc_name + "/access.log"
 #errorlog = VAR_LOG + proc_name + "/error.log"
-
