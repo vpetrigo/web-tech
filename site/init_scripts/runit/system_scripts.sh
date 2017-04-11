@@ -25,4 +25,3 @@ start_app_servers()
     sudo ln -s -f $RUNIT_DIR/hello_app /etc/service/
     sudo ln -s -f $RUNIT_DIR/ask_app /etc/service/
 }
-
