@@ -18,4 +18,3 @@ fi
 mysql -u root -p -e "create database if not exists ${DB_NAME};"
 mysql -u root -p -e "create user if not exists '${DB_USER}'@'%' identified by '${DB_USER_PASSWD}';"
 mysql -u root -p -e "grant all privileges on ${DB_NAME}.* to '${DB_USER}'@'%';"
-
