@@ -33,24 +33,26 @@
     </nav>
 
     <div id="content" class="container">
-        {% if questions %}
+        {% if question_list %}
         <ul>
-        {% for question in questions %}
+        {% for question in question_list %}
             <li><a href="{% url 'qa:question' question.id %}">{{ question.title }}</a></li>
         {% endfor %}
         </ul>
         {% endif %}
     </div>
 
+    {% if is_paginated %}
     <div id="switch-page" class="container">
-        {% if questions.has_previous %}
-            <a href="?page={{ questions.previous_page_number }}">previous</a>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
         {% endif %}
 
-        {% if questions.has_next %}
-            <a href="?page={{ questions.next_page_number }}">next</a>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
         {% endif %}
     </div>
+    {% endif %}
 
     <script src="/js/bootstrap.min.js" />
 </body>
