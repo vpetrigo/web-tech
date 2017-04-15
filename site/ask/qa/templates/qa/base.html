@@ -5,7 +5,7 @@
     <meta name="description" content="Top Asked questions">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-    <title>{% block title %}My amazing site{% endblock %}</title>
+    <title>{% block title %}Ask Question{% endblock %}</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
             <a class="btn btn-outline-success" href="/">Sign up</a>
         </div>
     </nav>
-
+    {% block content %}
     <div id="content" class="container">
         {% if question_list %}
         <ul>
@@ -53,6 +53,7 @@
         {% endif %}
     </div>
     {% endif %}
+    {% endblock %}
 
     <script src="/js/bootstrap.min.js" />
 </body>
