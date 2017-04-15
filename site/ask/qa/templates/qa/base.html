@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Top Asked questions">
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
     <title>{% block title %}My amazing site{% endblock %}</title>
 </head>
 
 <body>
-    <div id="sidebar">
+    <div id="sidebar" class="container">
         {% block sidebar %}
         <ul>
             <li><a href="{% url 'qa:index' %}">Main page</a></li>
@@ -18,7 +19,7 @@
         {% endblock %}
     </div>
 
-    <div id="content">
+    <div id="content" class="container">
         {% if questions %}
         <ul>
         {% for question in questions %}
@@ -28,7 +29,7 @@
         {% endif %}
     </div>
 
-    <div id="switch-page">
+    <div id="switch-page" class="container">
         {% if questions.has_previous %}
             <a href="?page={{ questions.previous_page_number }}">previous</a>
         {% endif %}
@@ -37,5 +38,7 @@
             <a href="?page={{ questions.next_page_number }}">next</a>
         {% endif %}
     </div>
+
+    <script src="js/bootstrap.min.js" />
 </body>
 </html>
