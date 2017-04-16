@@ -76,3 +76,10 @@ def ask(request: HttpRequest):
         form = AskForm()
 
     return render(request, "qa/ask.html", {"form": form})
+
+
+def signup(request: HttpRequest):
+    if request.method == "POST":
+        pass
+
+    return render(request, "qa/signup.html")
