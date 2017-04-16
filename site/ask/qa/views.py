@@ -2,9 +2,11 @@ from django.http import HttpResponse, HttpRequest, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.models import User as auth_models_User
+from django.contrib.auth import authenticate, login
 from django.views import generic
+from django.core.exceptions import ObjectDoesNotExist
 from .models import Question, Answer
-from .forms import AskForm, AnswerForm
+from .forms import AskForm, AnswerForm, SignupForm
 
 
 # Create your views here.
@@ -27,6 +29,16 @@ class PopularView(IndexView):
         return Question.objects.order_by("-rating", "-added_at")
 
 
+def _generate_test_user():
+    try:
+        stub_user = auth_models_User.objects.get(username="x")
+    except ObjectDoesNotExist:
+        stub_user = auth_models_User.objects.create_user(
+            username="x", email="x@x.x", password="y")
+
+    return stub_user
+
+
 def question(request: HttpRequest, question_id: int):
     req_question = get_object_or_404(Question, id=question_id)
     related_answers = Answer.objects.all().order_by("added_at")
@@ -35,8 +47,7 @@ def question(request: HttpRequest, question_id: int):
         form = AnswerForm(request.POST)
 
         if form.is_valid():
-            stub_user, created = auth_models_User.objects.get_or_create(
-                username="x", password="y")
+            stub_user = _generate_test_user()
             # save new form
             new_answer = form.save(commit=False)
             new_answer.author = stub_user
@@ -62,8 +73,7 @@ def ask(request: HttpRequest):
         form = AskForm(request.POST)
 
         if form.is_valid():
-            stub_user, created = auth_models_User.objects.get_or_create(
-                username="x", password="y")
+            stub_user = _generate_test_user()
             # save new form
             new_question = form.save(commit=False)
             new_question.author = stub_user
@@ -80,6 +90,24 @@ def ask(request: HttpRequest):
 
 def signup(request: HttpRequest):
     if request.method == "POST":
-        pass
+        form = SignupForm(request.POST)
 
-    return render(request, "qa/signup.html")
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.set_password(new_user.password)
+            new_user.save()
+            # get plain text password from request
+            password = request.POST["password"]
+
+            user = authenticate(
+                request, username=new_user.username, password=password)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+
+                    return HttpResponseRedirect(reverse("qa:index"))
+    else:
+        form = SignupForm()
+
+    return render(request, "qa/signup.html", {"form": form})

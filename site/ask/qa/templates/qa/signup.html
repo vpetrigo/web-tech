@@ -6,30 +6,47 @@ Sign Up
 
 {% block content %}
     <div class="container">
-        <form>
-            <div class="row justify-content-lg-center">
+        <form action="{% url "qa:signup" %}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    {% if not field.is_hidden %}
+                        {{ field.label_tag }}
+                    {% endif %}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <!--<div class="row justify-content-lg-center">
                 <div class="form-group col-4">
-                    <label for="user_name">Login</label>
-                    <input type="username" class="form-control" id="user_name" aria-describedby="usernameHelp" placeholder="Login" />
+                    {{ form.username.errors }}
+                    {{ form.username.label_tag }}
+                    <input type="text" class="form-control" id="{{ form.username.id_for_label }}"/>
+                    {{ field }}
                 </div>
             </div>
             <div class="row justify-content-lg-center">
                 <div class="form-group col-4">
-                    <label for="email_input">Email</label>
-                    <input type="email" class="form-control" id="email_input" aria-describedby="emailHelp" placeholder="user@example.com" />
+                    {{ form.email.errors }}
+                    {{ form.email.label_tag }}
+                    <input type="email" class="form-control" id="{{ form.email.id_for_label }}"/>
                 </div>
             </div>
             <div class="row justify-content-lg-center">
                 <div class="form-group col-4">
-                    <label for="input_password">Password</label>
-                    <input type="password" class="form-control" id="input_password" placeholder="Password" />
+                    {{ form.password.errors }}
+                    {{ form.password.label_tag }}
+                    <input type="text" class="form-control" id="{{ form.password.id_for_label }}"/>
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="col-md-4 offset-4">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
-    </form>
+        </form>
     </div>
 {% endblock %}
