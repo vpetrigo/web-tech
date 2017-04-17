@@ -47,10 +47,9 @@ def question(request: HttpRequest, question_id: int):
         form = AnswerForm(request.POST)
 
         if form.is_valid():
-            stub_user = _generate_test_user()
             # save new form
             new_answer = form.save(commit=False)
-            new_answer.author = stub_user
+            new_answer.author = request.user
             new_answer.save()
 
             return HttpResponseRedirect(
@@ -73,10 +72,9 @@ def ask(request: HttpRequest):
         form = AskForm(request.POST)
 
         if form.is_valid():
-            stub_user = _generate_test_user()
             # save new form
             new_question = form.save(commit=False)
-            new_question.author = stub_user
+            new_question.author = request.user
             new_question.save()
             # redirect to a new question page
             return HttpResponseRedirect(
@@ -111,3 +109,25 @@ def signup(request: HttpRequest):
         form = SignupForm()
 
     return render(request, "qa/signup.html", {"form": form})
+
+
+def log_in(request: HttpRequest):
+    username = ""
+    error = ""
+
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+
+                return HttpResponseRedirect(reverse("qa:index"))
+            else:
+                error = u"User inactive"
+        else:
+            error = u"Wrong user name or password"
+
+    return render(request, "qa/login.html", {"username": username, "error": error})
