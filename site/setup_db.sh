@@ -14,7 +14,9 @@ if [[ $? -ne 0 ]]; then
 fi
 # create DB and DB_User
 # variables DB_NAME DB_USER and DB_USER_PASSWD must be set
-
 mysql -u root -p -e "create database if not exists ${DB_NAME};"
 mysql -u root -p -e "create user if not exists '${DB_USER}'@'%' identified by '${DB_USER_PASSWD}';"
 mysql -u root -p -e "grant all privileges on ${DB_NAME}.* to '${DB_USER}'@'%';"
+
+echo -e "[client]\ndatabase = ${DB_NAME}\n" > ask/ask/app.cnf
+echo -e "user = ${DB_USER}\npassword = ${DB_USER_PASSWD}" >> ask/ask/app.cnf
