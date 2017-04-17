@@ -12,7 +12,7 @@ Sign Up
                 <div class="form-group col-4">
                     {{ form.username.errors }}
                     {{ form.username.label_tag }}
-                    <input type="text" name="{{ form.username.name }}" class="form-control" id="{{ form.username.id_for_label }}"/>
+                    <input type="text" name="{{ form.username.name }}" required class="form-control" id="{{ form.username.id_for_label }}"/>
                     {{ field }}
                 </div>
             </div>
@@ -27,7 +27,7 @@ Sign Up
                 <div class="form-group col-4">
                     {{ form.password.errors }}
                     {{ form.password.label_tag }}
-                    <input type="text" name="{{ form.password.name }}" class="form-control" id="{{ form.password.id_for_label }}"/>
+                    <input type="text" name="{{ form.password.name }}" required class="form-control" id="{{ form.password.id_for_label }}"/>
                 </div>
             </div>
             <div class="row">
