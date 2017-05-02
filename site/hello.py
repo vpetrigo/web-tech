@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
+
 def separate_vals(input_str: str, delimiter: str) -> bytes:
     q_vals = input_str.split(delimiter)
 
     return "\r\n".join(q_vals).encode()
+
 
 def app(env, start_response):
     """
@@ -20,4 +22,3 @@ def app(env, start_response):
     start_response(status, response_headers)
 
     yield resp
-
